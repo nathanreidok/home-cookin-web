@@ -13,9 +13,14 @@ import Link from '@material-ui/core/Link';
 import recipeService from '../services/recipeServices'
 import Recipe from '../types/Recipe';
 import Loader from './Loader';
+import { useParams } from 'react-router-dom';
+
+type RecipeParams = {
+    id: string
+}
 
 const RecipeComponent: React.FC = () => {
-
+    const { id } = useParams<RecipeParams>()
     const [isLoading, setIsLoading] = useState(false)
 
     // useEffect(() => {
@@ -30,6 +35,7 @@ const RecipeComponent: React.FC = () => {
 
     return (
         <Loader isLoading={isLoading}>
+            <Typography variant='h2'></Typography>
             <div>Recipe</div>
         </Loader>
     );
