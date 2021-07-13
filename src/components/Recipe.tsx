@@ -14,6 +14,7 @@ import recipeService from '../services/recipeServices'
 import Recipe from '../types/Recipe';
 import Loader from './Loader';
 import { useParams } from 'react-router-dom';
+import { List, ListItem, ListItemText } from '@material-ui/core';
 
 type RecipeParams = {
     id: string
@@ -21,22 +22,29 @@ type RecipeParams = {
 
 const RecipeComponent: React.FC = () => {
     const { id } = useParams<RecipeParams>()
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+    const [recipe, setRecipe] = useState<Recipe>()
 
-    // useEffect(() => {
-    //     console.log('getting recipes')
-    //     recipeService.getRecipes().then(recipes => {
-    //         console.log('recipes', recipes)
-    //         setIsLoading(false)
-    //     }, error => {
-    //         setIsLoading(false)
-    //     })
-    // }, [])
+    useEffect(() => {
+        recipeService.getRecipe(Number(id)).then(recipe => {
+            setIsLoading(false)
+            setRecipe(recipe)
+        }, error => {
+            setIsLoading(false)
+        })
+    }, [])
 
     return (
         <Loader isLoading={isLoading}>
-            <Typography variant='h2'></Typography>
-            <div>Recipe</div>
+            <Typography variant='h2'>{recipe?.name}</Typography>
+            <p>{recipe?.directions}</p>
+            <List>
+                {recipe?.ingredients.map(i => {
+                    <ListItem>
+                        <ListItemText primary={i} />
+                    </ListItem>
+                })}
+            </List>
         </Loader>
     );
 }

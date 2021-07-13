@@ -5,11 +5,16 @@ var getRecipes = async () => {
 }
 
 var getRecipe = async (id: Number) => {
-    return recipes.find(r => r.id === id)
+    var recipe = recipes.find(r => r.id === id)
+    if (!recipe) {
+        throw 'Could not find recipe.'
+    }
+    return recipe
 }
 
 export default {
-    getRecipes
+    getRecipes,
+    getRecipe,
 }
 
 const recipes: Recipe[] = [
