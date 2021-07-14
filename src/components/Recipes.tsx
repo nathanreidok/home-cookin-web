@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Button from '@material-ui/core/Button';
+import Button, { ButtonProps } from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom'
 import recipeService from '../services/recipeServices'
 import Recipe from '../types/Recipe';
 import Loader from './Loader';
+import LinkButton from './util/LinkButton';
 
 const useStyles = makeStyles((theme) => ({
     heroContent: {
@@ -101,7 +102,7 @@ const Recipes: React.FC = () => {
                                 </CardContent>
                                 <CardActions>
                                     {/*@ts-ignore*/}
-                                    <Button size="small" color="primary" component={Link} to={`/recipes/${recipe.id}`}>View</Button>
+                                    <LinkButton size="small" color="primary" component={Link} to={`/recipes/${recipe.id}`}>View</LinkButton>
                                     <Button size="small" color="primary">Edit</Button>
                                 </CardActions>
                             </Card>

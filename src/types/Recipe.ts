@@ -1,8 +1,8 @@
 type Recipe = {
-    id: Number,
-    name: String,
-    ingredients: String[],
-    directions: String
+    id: number,
+    name: string,
+    ingredients: string[],
+    directions: string
 }
 
 export default Recipe

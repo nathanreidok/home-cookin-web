@@ -12,7 +12,7 @@ import Recipe from './components/Recipe';
 
 const useStyles = makeStyles((theme) => ({
     main: {
-        marginTop: '64px'
+        margin: '64px 2rem 2rem 2rem'
     },
     icon: {
         marginRight: theme.spacing(2),
