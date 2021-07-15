@@ -8,6 +8,7 @@ import Loader from './Loader';
 import { Link, useParams } from 'react-router-dom';
 import { Fab, FabProps, List, ListItem, ListItemText } from '@material-ui/core';
 import { Edit as EditIcon } from '@material-ui/icons';
+import { useFetch } from '../hooks/useFetch';
 
 type RecipeParams = {
     id: string
@@ -44,20 +45,21 @@ const FabButton = (props: FabProps<Link>) => <Fab component={Link} {...props}></
 
 const RecipeComponent: React.FC = () => {
     const { id } = useParams<RecipeParams>()
+    const { status, data } = useFetch<Recipe[]>(`/recipes/${id}`)
     const [isLoading, setIsLoading] = useState(true)
     const [recipe, setRecipe] = useState<Recipe>()
     const classes = useStyles()
 
-    useEffect(() => {
-        recipeService.getRecipe(Number(id)).then(recipe => {
-            setIsLoading(false)
-            setRecipe(recipe)
-        }, error => {
-            setIsLoading(false)
-        })
-    }, [])
+    // useEffect(() => {
+    //     recipeService.getRecipe(Number(id)).then(recipe => {
+    //         setIsLoading(false)
+    //         setRecipe(recipe)
+    //     }, error => {
+    //         setIsLoading(false)
+    //     })
+    // }, [])
 
-    return (
+    return isLoading ? <Loader /> : (
         <Loader isLoading={isLoading}>
             <div className={classes.root}>
                 <div className={classes.container}>
@@ -68,7 +70,7 @@ const RecipeComponent: React.FC = () => {
                     <List>
                         {recipe?.ingredients.map((ingredient, idx) =>
                             <ListItem key={idx} dense={true} className={classes.listItem}>
-                                <ListItemText primary={ingredient} />
+                                <ListItemText primary={`${ingredient.qtyNumerator}`} />
                             </ListItem>
                         )}
                     </List>

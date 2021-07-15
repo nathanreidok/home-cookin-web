@@ -1,11 +1,11 @@
 import Recipe from "../types/Recipe"
 
 var getRecipes = async () => {
-    return recipes
+    return await fetchRecipes()
 }
 
 var getRecipe = async (id: Number) => {
-    var recipe = recipes.find(r => r.id === id)
+    var recipe = (await fetchRecipes()).find(r => r.id === id)
     if (!recipe) {
         throw 'Could not find recipe.'
     }
@@ -17,15 +17,33 @@ export default {
     getRecipe,
 }
 
-const recipes: Recipe[] = [
-    { id: 1, name: 'Cake', ingredients: ['Eggs', 'Milk', 'Sugar'], directions: 'Mix it and bake it.' },
-    { id: 2, name: 'Cake', ingredients: ['Eggs', 'Milk', 'Sugar'], directions: 'Mix it and bake it.' },
-    { id: 3, name: 'Cake', ingredients: ['Eggs', 'Milk', 'Sugar'], directions: 'Mix it and bake it.' },
-    { id: 4, name: 'Cake', ingredients: ['Eggs', 'Milk', 'Sugar'], directions: 'Mix it and bake it.' },
-    { id: 5, name: 'Cake', ingredients: ['Eggs', 'Milk', 'Sugar'], directions: 'Mix it and bake it.' },
-    { id: 6, name: 'Cake', ingredients: ['Eggs', 'Milk', 'Sugar'], directions: 'Mix it and bake it.' },
-    { id: 7, name: 'Cake', ingredients: ['Eggs', 'Milk', 'Sugar'], directions: 'Mix it and bake it.' },
-    { id: 8, name: 'Cake', ingredients: ['Eggs', 'Milk', 'Sugar'], directions: 'Mix it and bake it.' },
-    { id: 9, name: 'Cake', ingredients: ['Eggs', 'Milk', 'Sugar'], directions: 'Mix it and bake it.' },
-    { id: 10, name: 'Cake', ingredients: ['Eggs', 'Milk', 'Sugar'], directions: 'Mix it and bake it.' },
-]
+const fetchRecipes = async () => new Promise<Recipe[]>((res, rej) => {
+    res([1,2,3,4,5,6,7,8,9,10].map<Recipe>(value => ({
+        id: value,
+        name: 'Cake',
+        ingredients: [{
+            recipeId: value,
+            ingredientId: 1,
+            ingredient: 'Eggs',
+            qtyNumerator: 1,
+            qtyDenominator: 1,
+        },{
+            recipeId: value,
+            ingredientId: 2,
+            ingredient: 'Milk',
+            qtyNumerator: 1,
+            qtyDenominator: 2,
+            measurementId: 3,
+            measurement: 'Tablespoon',
+        },{
+            recipeId: value,
+            ingredientId: 3,
+            ingredient: 'Sugar',
+            qtyNumerator: 5,
+            qtyDenominator: 2,
+            measurementId: 2,
+            measurement: 'Cup'
+        }],
+        directions: 'Mix it and bake it.'
+    })))
+})
