@@ -9,13 +9,13 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import recipeService from '../services/recipeServices'
+import recipeService from '../services/recipeService'
 import Recipe from '../types/Recipe';
 import Loader from './Loader';
 import { Link, useParams } from 'react-router-dom';
 import { Fab, FabProps, List, ListItem, ListItemText, TextField } from '@material-ui/core';
 import { Edit as EditIcon } from '@material-ui/icons';
-import { useInput } from '../hooks/form';
+import { useInput } from '../hooks';
 
 type RecipeFormProps = {
     recipe: Recipe
@@ -34,7 +34,6 @@ var useStyles = makeStyles(theme => ({
     },
     listItem: {
         border: '1px solid gray',
-        // borderRadius: 5%
     },
     subHeader: {
         paddingTop: '1rem'

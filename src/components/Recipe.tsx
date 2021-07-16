@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-import recipeService from '../services/recipeServices'
+import recipeService from '../services/recipeService'
 import Recipe from '../types/Recipe';
 import Loader from './Loader';
 import { Link, useParams } from 'react-router-dom';

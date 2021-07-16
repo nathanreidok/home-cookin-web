@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
+import recipeService from '../services/recipeService'
 
-export const useFetch = <T>(url: string) => {
+const useFakeData = true
+
+const useFetch = <T>(url: string) => {
     const [status, setStatus] = useState('idle')
     const [data, setData] = useState<T>()
 
@@ -17,3 +20,5 @@ export const useFetch = <T>(url: string) => {
 
     return { status, data }
 }
+
+export default useFetch

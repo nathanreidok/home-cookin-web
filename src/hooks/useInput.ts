@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react'
 
-export const useInput = (initialValue: string) => {
+const useInput = (initialValue: string) => {
     const [value, setValue] = useState(initialValue)
 
     return {
@@ -14,3 +14,5 @@ export const useInput = (initialValue: string) => {
         }
     }
 }
+
+export default useInput
