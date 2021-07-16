@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Link } from 'react-router-dom'
 
-import recipeService from '../services/recipeServices'
+import recipeService from '../services/recipeService'
 import Recipe from '../types/Recipe';
 import Loader from './Loader';
 import LinkButton from './util/LinkButton';
