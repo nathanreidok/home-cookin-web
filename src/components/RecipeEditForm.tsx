@@ -15,7 +15,7 @@ import Loader from './Loader';
 import { Link, useParams } from 'react-router-dom';
 import { Fab, FabProps, List, ListItem, ListItemText, TextField } from '@material-ui/core';
 import { Edit as EditIcon } from '@material-ui/icons';
-import { useInput } from '../hooks';
+import useInput from '../hooks/useInput';
 
 type RecipeFormProps = {
     recipe: Recipe

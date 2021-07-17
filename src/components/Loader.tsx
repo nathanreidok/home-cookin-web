@@ -1,23 +1,14 @@
-import React from 'react';
 import './Loader.css'
 
-type LoadProps = {
-    isLoading: boolean
-}
-
-const Loader: React.FC<LoadProps> = ({ isLoading, children }) => {
+const Loader = () => {
     return (
-        <>
-            {isLoading ?
-                <div className="loading">
-                    <div className="dot"></div>
-                    <div className="dot"></div>
-                    <div className="dot"></div>
-                    <div className="dot"></div>
-                    <div className="dot"></div>
-                </div>
-                : children}
-        </>
+        <div className="loading">
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+        </div>
     );
 }
 

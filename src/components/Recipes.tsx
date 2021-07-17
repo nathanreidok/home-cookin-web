@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import Button, { ButtonProps } from '@material-ui/core/Button';
+import React from 'react';
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -9,11 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Link } from 'react-router-dom'
-
-import recipeService from '../services/recipeService'
-import Recipe from '../types/Recipe';
 import Loader from './Loader';
 import LinkButton from './util/LinkButton';
+import { useRecipes } from '../hooks/fetch';
 
 const useStyles = makeStyles((theme) => ({
     heroContent: {
@@ -43,22 +41,12 @@ const useStyles = makeStyles((theme) => ({
 const Recipes: React.FC = () => {
     const classes = useStyles();
 
-    const [isLoading, setIsLoading] = useState(true)
-    const [recipes, setRecipes] = useState<Recipe[]>([])
+    const { isLoading, data: recipes } = useRecipes()
 
-    useEffect(() => {
-        console.log('getting recipes')
-        recipeService.getRecipes().then(recipes => {
-            console.log('recipes', recipes)
-            setIsLoading(false)
-            setRecipes(recipes)
-        }, error => {
-            setIsLoading(false)
-        })
-    }, [])
-
+    if (isLoading) return <Loader />
+    if (!recipes) return null
     return (
-        <Loader isLoading={isLoading}>
+        <>
             {/* Hero unit */}
             <div className={classes.heroContent}>
                 <Container maxWidth="sm">
@@ -110,7 +98,7 @@ const Recipes: React.FC = () => {
                     ))}
                 </Grid>
             </Container>
-        </Loader>
+        </>
     );
 }
 
